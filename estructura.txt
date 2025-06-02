@@ -1,0 +1,137 @@
+Listado de rutas de carpetas para el volumen Windows
+El número de serie del volumen es B824-833F
+C:.
+|   .gitignore
+|   estructura.tx
+|   estructura.txt
+|   README.md
+|   
++---.idea
+|       .gitignore
+|       compiler.xml
+|       encodings.xml
+|       jarRepositories.xml
+|       Microservices-login-app.iml
+|       misc.xml
+|       modules.xml
+|       vcs.xml
+|       workspace.xml
+|       
++---auth-service
+|   |   .gitattributes
+|   |   .gitignore
+|   |   HELP.md
+|   |   mvnw
+|   |   mvnw.cmd
+|   |   pom.xml
+|   |   
+|   +---.mvn
+|   |   \---wrapper
+|   |           maven-wrapper.properties
+|   |           
+|   \---src
+|       +---main
+|       |   +---java
+|       |   |   \---com
+|       |   |       \---microservices
+|       |   |           \---auth_service
+|       |   |               |   AuthServiceApplication.java
+|       |   |               |   
+|       |   |               +---config
+|       |   |               +---controller
+|       |   |               |       AuthController.java
+|       |   |               |       
+|       |   |               +---dto
+|       |   |               |       AuthResponse.java
+|       |   |               |       RegisterRequest.java
+|       |   |               |       
+|       |   |               +---model
+|       |   |               |       User.java
+|       |   |               |       
+|       |   |               +---repository
+|       |   |               |       UserRepository.java
+|       |   |               |       
+|       |   |               +---security
+|       |   |               |       JwtAuthFilter.java
+|       |   |               |       JwtService.java
+|       |   |               |       SecurityConfig.java
+|       |   |               |       
+|       |   |               \---service
+|       |   |                       AuthService.java
+|       |   |                       
+|       |   \---resources
+|       |       |   application.yml
+|       |       |   
+|       |       +---static
+|       |       \---templates
+|       \---test
+|           \---java
+|               \---com
+|                   \---microservices
+|                       \---auth_service
+|                               AuthServiceApplicationTests.java
+|                               
++---gateway-service
+|   |   .gitattributes
+|   |   .gitignore
+|   |   HELP.md
+|   |   mvnw
+|   |   mvnw.cmd
+|   |   pom.xml
+|   |   
+|   +---.mvn
+|   |   \---wrapper
+|   |           maven-wrapper.properties
+|   |           
+|   \---src
+|       +---main
+|       |   +---java
+|       |   |   \---com
+|       |   |       \---microservices
+|       |   |           \---gateway_service
+|       |   |                   GatewayServiceApplication.java
+|       |   |                   
+|       |   \---resources
+|       |       |   application.properties
+|       |       |   
+|       |       +---static
+|       |       \---templates
+|       \---test
+|           \---java
+|               \---com
+|                   \---microservices
+|                       \---gateway_service
+|                               GatewayServiceApplicationTests.java
+|                               
+\---user-service
+    |   .gitattributes
+    |   .gitignore
+    |   HELP.md
+    |   mvnw
+    |   mvnw.cmd
+    |   pom.xml
+    |   
+    +---.mvn
+    |   \---wrapper
+    |           maven-wrapper.properties
+    |           
+    \---src
+        +---main
+        |   +---java
+        |   |   \---com
+        |   |       \---microservices
+        |   |           \---user_service
+        |   |                   UserServiceApplication.java
+        |   |                   
+        |   \---resources
+        |       |   application.properties
+        |       |   
+        |       +---static
+        |       \---templates
+        \---test
+            \---java
+                \---com
+                    \---microservices
+                        \---user_service
+                                UserServiceApplicationTests.java
+                                
