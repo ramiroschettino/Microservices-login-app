@@ -1,11 +1,12 @@
 package com.microservices.auth_service.service;
 
+import com.microservices.auth_service.client.UserClient;
 import com.microservices.auth_service.dto.*;
-import com.microservices.auth_service.model.User;
-import com.microservices.auth_service.repository.UserRepository;
 import com.microservices.auth_service.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.*;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,49 +14,75 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private final UserRepository userRepository;
+    private final UserClient userClient;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
 
     public AuthResponse register(RegisterRequest request) {
-        User user = User.builder()
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role("USER")
+        // 1. Crear usuario en user-service
+        UserResponse userResponse = userClient.createUser(
+                new RegisterRequest(
+                        request.getEmail(),
+                        passwordEncoder.encode(request.getPassword())
+                )
+        );
+
+        // 2. Generar tokens
+        UserDetails userDetails = User.builder()
+                .username(userResponse.getEmail())
+                .password("") // No necesario para el token
+                .roles(userResponse.getRole())
                 .build();
-        userRepository.save(user);
 
-        String accessToken = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
-
-        return new AuthResponse(accessToken, refreshToken);
+        return generateTokens(userDetails);
     }
 
     public AuthResponse login(LoginRequest request) {
+        // 1. Autenticar credenciales
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+        // 2. Obtener usuario de user-service
+        UserResponse userResponse = userClient.getUserByEmail(request.getEmail());
 
-        String accessToken = jwtService.generateToken(user);
-        String refreshToken = jwtService.generateRefreshToken(user);
+        // 3. Generar tokens
+        UserDetails userDetails = User.builder()
+                .username(userResponse.getEmail())
+                .password("")
+                .roles(userResponse.getRole())
+                .build();
 
-        return new AuthResponse(accessToken, refreshToken);
+        return generateTokens(userDetails);
     }
 
     public AuthResponse refreshToken(RefreshTokenRequest request) {
-        String refreshToken = request.getRefreshToken();
-        String email = jwtService.extractUsername(refreshToken);
-        User user = userRepository.findByEmail(email).orElseThrow();
+        String email = jwtService.extractUsername(request.getRefreshToken());
 
-        if (!jwtService.isTokenValid(refreshToken, user)) {
+        // Verificar usuario en user-service
+        UserResponse userResponse = userClient.getUserByEmail(email);
+
+        UserDetails userDetails = User.builder()
+                .username(userResponse.getEmail())
+                .password("")
+                .roles(userResponse.getRole())
+                .build();
+
+        if (!jwtService.isTokenValid(request.getRefreshToken(), userDetails)) {
             throw new RuntimeException("Refresh token inválido");
         }
 
-        String newAccessToken = jwtService.generateToken(user);
-        return new AuthResponse(newAccessToken, refreshToken);
+        return new AuthResponse(
+                jwtService.generateToken(userDetails),
+                request.getRefreshToken()
+        );
+    }
+
+    private AuthResponse generateTokens(UserDetails userDetails) {
+        return new AuthResponse(
+                jwtService.generateToken(userDetails),
+                jwtService.generateRefreshToken(userDetails)
+        );
     }
 }

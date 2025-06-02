@@ -1,8 +1,7 @@
-Listado de rutas de carpetas para el volumen Windows
-El número de serie del volumen es B824-833F
+Listado de rutas de carpetas
+El n£mero de serie del volumen es C2D7-9C5E
 C:.
 |   .gitignore
-|   estructura.tx
 |   estructura.txt
 |   README.md
 |   
@@ -20,7 +19,6 @@ C:.
 +---auth-service
 |   |   .gitattributes
 |   |   .gitignore
-|   |   HELP.md
 |   |   mvnw
 |   |   mvnw.cmd
 |   |   pom.xml
@@ -37,19 +35,14 @@ C:.
 |       |   |           \---auth_service
 |       |   |               |   AuthServiceApplication.java
 |       |   |               |   
-|       |   |               +---config
 |       |   |               +---controller
 |       |   |               |       AuthController.java
 |       |   |               |       
 |       |   |               +---dto
 |       |   |               |       AuthResponse.java
+|       |   |               |       LoginRequest.java
+|       |   |               |       RefreshTokenRequest.java
 |       |   |               |       RegisterRequest.java
-|       |   |               |       
-|       |   |               +---model
-|       |   |               |       User.java
-|       |   |               |       
-|       |   |               +---repository
-|       |   |               |       UserRepository.java
 |       |   |               |       
 |       |   |               +---security
 |       |   |               |       JwtAuthFilter.java
@@ -60,10 +53,8 @@ C:.
 |       |   |                       AuthService.java
 |       |   |                       
 |       |   \---resources
-|       |       |   application.yml
-|       |       |   
-|       |       +---static
-|       |       \---templates
+|       |           application.yml
+|       |           
 |       \---test
 |           \---java
 |               \---com
@@ -74,7 +65,6 @@ C:.
 +---gateway-service
 |   |   .gitattributes
 |   |   .gitignore
-|   |   HELP.md
 |   |   mvnw
 |   |   mvnw.cmd
 |   |   pom.xml
@@ -92,10 +82,8 @@ C:.
 |       |   |                   GatewayServiceApplication.java
 |       |   |                   
 |       |   \---resources
-|       |       |   application.properties
-|       |       |   
-|       |       +---static
-|       |       \---templates
+|       |           application.properties
+|       |           
 |       \---test
 |           \---java
 |               \---com
@@ -106,7 +94,6 @@ C:.
 \---user-service
     |   .gitattributes
     |   .gitignore
-    |   HELP.md
     |   mvnw
     |   mvnw.cmd
     |   pom.xml
@@ -124,10 +111,8 @@ C:.
         |   |                   UserServiceApplication.java
         |   |                   
         |   \---resources
-        |       |   application.properties
-        |       |   
-        |       +---static
-        |       \---templates
+        |           application.properties
+        |           
         \---test
             \---java
                 \---com
