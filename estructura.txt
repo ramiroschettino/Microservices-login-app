@@ -1,7 +1,6 @@
-Listado de rutas de carpetas
-El n£mero de serie del volumen es C2D7-9C5E
 C:.
 |   .gitignore
+|   docker-compose.yml
 |   estructura.txt
 |   README.md
 |   
@@ -19,6 +18,7 @@ C:.
 +---auth-service
 |   |   .gitattributes
 |   |   .gitignore
+|   |   Dockerfile
 |   |   mvnw
 |   |   mvnw.cmd
 |   |   pom.xml
@@ -35,6 +35,9 @@ C:.
 |       |   |           \---auth_service
 |       |   |               |   AuthServiceApplication.java
 |       |   |               |   
+|       |   |               +---client
+|       |   |               |       UserClient.java
+|       |   |               |       
 |       |   |               +---controller
 |       |   |               |       AuthController.java
 |       |   |               |       
@@ -94,6 +97,7 @@ C:.
 \---user-service
     |   .gitattributes
     |   .gitignore
+    |   Dockerfile
     |   mvnw
     |   mvnw.cmd
     |   pom.xml
@@ -111,7 +115,7 @@ C:.
         |   |                   UserServiceApplication.java
         |   |                   
         |   \---resources
-        |           application.properties
+        |           application.yml
         |           
         \---test
             \---java
