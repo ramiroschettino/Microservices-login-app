@@ -19,7 +19,7 @@ public class UserService {
 
     public UserResponse register(RegisterRequest request) {
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exists");
+            throw new RuntimeException("El correo electrónico ya existe");
         }
         User user = new User();
         user.setEmail(request.getEmail());
@@ -30,16 +30,16 @@ public class UserService {
 
     public UserResponse validateUser(LoginRequest request) {
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new RuntimeException("Credenciales inválidas");
         }
         return new UserResponse(user.getEmail(), user.getRole());
     }
 
     public UserResponse getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         return new UserResponse(user.getEmail(), user.getRole());
     }
 }
