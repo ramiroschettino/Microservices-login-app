@@ -1,12 +1,6 @@
 package com.microservices.user_service.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class UserResponse {
-    // Getters y setters
     private String email;
     private String role;
 
@@ -17,4 +11,19 @@ public class UserResponse {
         this.role = role;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }

@@ -34,7 +34,7 @@ services:
     build: ./auth-service
     container_name: auth_service
     ports:
-      - "8080:8080"
+      - "8082:8080" # Cambia el puerto externo a 8082
     environment:
       SPRING_PROFILES_ACTIVE: dev
       USER_SERVICE_URL: http://user-service:8081

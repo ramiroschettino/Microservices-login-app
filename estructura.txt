@@ -1,3 +1,5 @@
+Listado de rutas de carpetas para el volumen Windows
+El número de serie del volumen es B824-833F
 C:.
 |   .gitignore
 |   docker-compose.yml
@@ -19,6 +21,7 @@ C:.
 |   |   .gitattributes
 |   |   .gitignore
 |   |   Dockerfile
+|   |   HELP.md
 |   |   mvnw
 |   |   mvnw.cmd
 |   |   pom.xml
@@ -38,6 +41,7 @@ C:.
 |       |   |               +---client
 |       |   |               |       UserClient.java
 |       |   |               |       
+|       |   |               +---config
 |       |   |               +---controller
 |       |   |               |       AuthController.java
 |       |   |               |       
@@ -46,6 +50,7 @@ C:.
 |       |   |               |       LoginRequest.java
 |       |   |               |       RefreshTokenRequest.java
 |       |   |               |       RegisterRequest.java
+|       |   |               |       UserResponse.java
 |       |   |               |       
 |       |   |               +---security
 |       |   |               |       JwtAuthFilter.java
@@ -56,8 +61,10 @@ C:.
 |       |   |                       AuthService.java
 |       |   |                       
 |       |   \---resources
-|       |           application.yml
-|       |           
+|       |       |   application.yml
+|       |       |   
+|       |       +---static
+|       |       \---templates
 |       \---test
 |           \---java
 |               \---com
@@ -68,6 +75,7 @@ C:.
 +---gateway-service
 |   |   .gitattributes
 |   |   .gitignore
+|   |   HELP.md
 |   |   mvnw
 |   |   mvnw.cmd
 |   |   pom.xml
@@ -85,8 +93,10 @@ C:.
 |       |   |                   GatewayServiceApplication.java
 |       |   |                   
 |       |   \---resources
-|       |           application.properties
-|       |           
+|       |       |   application.properties
+|       |       |   
+|       |       +---static
+|       |       \---templates
 |       \---test
 |           \---java
 |               \---com
@@ -98,6 +108,7 @@ C:.
     |   .gitattributes
     |   .gitignore
     |   Dockerfile
+    |   HELP.md
     |   mvnw
     |   mvnw.cmd
     |   pom.xml
@@ -112,11 +123,30 @@ C:.
         |   |   \---com
         |   |       \---microservices
         |   |           \---user_service
-        |   |                   UserServiceApplication.java
-        |   |                   
+        |   |               |   UserServiceApplication.java
+        |   |               |   
+        |   |               +---controller
+        |   |               |       UserController.java
+        |   |               |       
+        |   |               +---dto
+        |   |               |       LoginRequest.java
+        |   |               |       RegisterRequest.java
+        |   |               |       UserResponse.java
+        |   |               |       
+        |   |               +---model
+        |   |               |       User.java
+        |   |               |       
+        |   |               +---repository
+        |   |               |       UserRepository.java
+        |   |               |       
+        |   |               \---service
+        |   |                       UserService.java
+        |   |                       
         |   \---resources
-        |           application.yml
-        |           
+        |       |   application.yml
+        |       |   
+        |       +---static
+        |       \---templates
         \---test
             \---java
                 \---com
