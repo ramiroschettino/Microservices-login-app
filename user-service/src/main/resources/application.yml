@@ -11,3 +11,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  secret: '4e2162e75f9c4d29a372bcadf3d8449b12345678901234567890123456789012'
+  access-token-expiration: 900
+  refresh-token-expiration: 86400

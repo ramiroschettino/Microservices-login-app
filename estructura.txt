@@ -125,6 +125,9 @@ C:.
         |   |           \---user_service
         |   |               |   UserServiceApplication.java
         |   |               |   
+        |   |               +---config
+        |   |               |       SecurityConfig.java
+        |   |               |       
         |   |               +---controller
         |   |               |       UserController.java
         |   |               |       
