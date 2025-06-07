@@ -1,14 +1,24 @@
 package com.microservices.user_service.dto;
 
 public class UserResponse {
+    private Long id;
     private String email;
     private String role;
 
     public UserResponse() {}
 
-    public UserResponse(String email, String role) {
+    public UserResponse(Long id, String email, String role) {
+        this.id = id;
         this.email = email;
         this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getEmail() {

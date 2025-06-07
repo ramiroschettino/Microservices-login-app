@@ -8,6 +8,8 @@ import com.microservices.user_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -24,8 +26,9 @@ public class UserService {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setRole(request.getRole());
         userRepository.save(user);
-        return new UserResponse(user.getEmail(), user.getRole());
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
     }
 
     public UserResponse validateUser(LoginRequest request) {
@@ -34,12 +37,18 @@ public class UserService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Credenciales inválidas");
         }
-        return new UserResponse(user.getEmail(), user.getRole());
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
     }
 
     public UserResponse getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return new UserResponse(user.getEmail(), user.getRole());
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
+    }
+
+    public List<UserResponse> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> new UserResponse(user.getId(), user.getEmail(), user.getRole()))
+                .collect(Collectors.toList());
     }
 }
