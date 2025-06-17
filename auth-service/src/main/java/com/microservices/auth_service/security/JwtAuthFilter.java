@@ -44,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = User.builder()
                     .username(email)
-                    .password("") // no lo necesitamos
+                    .password("")
                     .roles(role)
                     .build();
 

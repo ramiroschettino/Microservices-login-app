@@ -26,9 +26,10 @@ public class UserService {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER"); // Forzar siempre USER
+        user.setRole("USER");
         userRepository.save(user);
-        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
+
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole(), user.getPassword());
     }
 
     public UserResponse validateUser(LoginRequest request) {
@@ -37,18 +38,20 @@ public class UserService {
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("Credenciales inválidas");
         }
-        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
+
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole(), user.getPassword());
     }
 
     public UserResponse getUserByEmail(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return new UserResponse(user.getId(), user.getEmail(), user.getRole());
+
+        return new UserResponse(user.getId(), user.getEmail(), user.getRole(), user.getPassword());
     }
 
     public List<UserResponse> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(user -> new UserResponse(user.getId(), user.getEmail(), user.getRole()))
+                .map(user -> new UserResponse(user.getId(), user.getEmail(), user.getRole(), user.getPassword()))
                 .collect(Collectors.toList());
     }
 }
